@@ -4,783 +4,898 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wild Horizon Adventures - Modular</title>
+    
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css">
+    
+    <style>
+        /* ====== GLOBAL STYLES ====== */
+        :root {
+            --primary-color: #ffc107;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f8f9fa;
+            --text-dark: #333;
+            --text-light: #666;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
 
-    <title>Journey HTML CSS Template</title>
-<!-- 
-Journey Template 
-http://www.templatemo.com/tm-511-journey
--->
-    <!-- load stylesheets -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">  <!-- Google web font "Open Sans" -->
-    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">                <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">                                      <!-- Bootstrap style -->
-    <link rel="stylesheet" type="text/css" href="css/datepicker.css"/>
-    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
-    <link rel="stylesheet" href="css/templatemo-style.css">                                   <!-- Templatemo style -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
 
+        /* ====== NAVIGATION COMPONENT STYLES ====== */
+        .navigation-component {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: var(--transition);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-            <!--[if lt IE 9]>
-              <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-              <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-          <![endif]-->
-      </head>
+        .navigation-component.scrolled {
+            background: linear-gradient(90deg, var(--dark-bg), #2c2c2c) !important;
+            box-shadow: var(--shadow);
+        }
 
-      <body>
-        <div class="tm-main-content" id="top">
-            <div class="tm-top-bar-bg"></div>    
+        .navigation-component.scrolled .nav-link,
+        .navigation-component.scrolled .brand-text {
+            color: var(--light-bg) !important;
+        }
+
+        .navigation-component .animate-logo {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .navigation-component .animate-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .navigation-component .animated-link {
+            transition: var(--transition);
+        }
+
+        .navigation-component .animated-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+
+        /* ====== HERO COMPONENT STYLES ====== */
+        .hero-component {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-component .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero-component .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-component .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* ====== FEATURES COMPONENT STYLES ====== */
+        .features-component {
+            padding: 5rem 0;
+            background: var(--light-bg);
+        }
+
+        .features-component .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            overflow: hidden;
+        }
+
+        .features-component .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .features-component .feature-image {
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .features-component .feature-card:hover .feature-image {
+            transform: scale(1.05);
+        }
+
+        /* ====== PACKAGE COMPONENT STYLES ====== */
+        .package-component {
+            padding: 4rem 0;
+            margin: 2rem 0;
+        }
+
+        .package-component:nth-child(even) {
+            background: var(--light-bg);
+        }
+
+        .package-component .package-banner {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .package-component .package-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .package-component .package-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .package-component .package-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .package-component .package-intro {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        /* ====== CONTACT COMPONENT STYLES ====== */
+        .contact-component {
+            padding: 5rem 0;
+            background: var(--light-bg);
+        }
+
+        .contact-component .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-component .map-container {
+            height: 400px;
+            margin-top: 3rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        /* ====== FOOTER COMPONENT STYLES ====== */
+        .footer-component {
+            background: var(--dark-bg);
+            color: var(--light-bg);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* ====== MODAL COMPONENT STYLES ====== */
+        .modal-component .modal-content {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .modal-component .modal-header {
+            background: var(--dark-bg);
+            color: white;
+            border-bottom: none;
+        }
+
+        /* ====== RESPONSIVE DESIGN ====== */
+        @media (max-width: 768px) {
+            .hero-component .hero-title {
+                font-size: 2.5rem;
+            }
             
-            <div class="tm-top-bar bg-transparent fixed-top transition-bg blur-bg" id="tm-top-bar">
-                <div class="container">
-                  <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="navbar-brand d-flex align-items-center animate-logo" href="#">
-                      <img src="img/world-horizon.png" alt="Site logo" style="height: 40px; margin-right: 10px;">
-                      <span class="brand-text h5 mb-0">Wild Horizon Adventures</span>
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon"></span>
-                    </button>
-              
-                    <div class="collapse navbar-collapse" id="mainNav">
-                      <ul class="navbar-nav ml-auto">
+            .hero-component .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .package-component .package-title {
+                font-size: 2rem;
+            }
+            
+            .navigation-component .navbar-brand {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ====== NAVIGATION COMPONENT ====== -->
+    <nav class="navigation-component bg-transparent" id="mainNavigation">
+        <div class="container">
+            <div class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand d-flex align-items-center animate-logo" href="#top">
+                    <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&w=40&h=40&fit=crop&crop=center" alt="Site logo" style="height: 40px; margin-right: 10px; border-radius: 50%;">
+                    <span class="brand-text h5 mb-0">Wild Horizon Adventures</span>
+                </a>
+                
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                          <a class="nav-link active animated-link" href="#top">Home</a>
+                            <a class="nav-link animated-link" href="#hero">Home</a>
                         </li>
-                        <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle animated-link" href="#" id="packagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Packages
-                          </a>
-                          <div class="dropdown-menu animated fadeIn" aria-labelledby="packagesDropdown">
-                            <a class="dropdown-item" href="#classic-bush-beach">
-                              <i class="fas fa-tree text-success mr-2"></i>Classic Bush & Beach
-                            </a>
-                            <a class="dropdown-item" href="#road-coastal">
-                              <i class="fas fa-route text-warning mr-2"></i>Road & Coastal Escape
-                            </a>
-                            <a class="dropdown-item" href="#safari-only">
-                              <i class="fas fa-binoculars text-primary mr-2"></i>Safari Immersion
-                            </a>
-                            <a class="dropdown-item" href="#coastal-only">
-                              <i class="fas fa-umbrella-beach text-info mr-2"></i>Coastal Getaway
-                            </a>
-                          </div>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link animated-link" href="#tm-section-2">Top Destinations</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link animated-link" href="#tm-section-3">Offers</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link animated-link" href="#tm-section-4">Contact Us</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </nav>
-                </div>
-              </div>
-              
-              <style>
-                .transition-bg {
-                  transition: background-color 0.4s ease, box-shadow 0.4s ease;
-                }
-                .tm-top-bar.scrolled {
-                  background: linear-gradient(90deg, #1a1a1a, #2c2c2c) !important;
-                  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-                  backdrop-filter: blur(6px);
-                }
-                .tm-top-bar.scrolled .nav-link,
-                .tm-top-bar.scrolled .brand-text {
-                  color: #f8f9fa !important;
-                }
-                .tm-top-bar.scrolled .navbar-brand img {
-                  filter: brightness(0) invert(1);
-                }
-                .blur-bg {
-                  backdrop-filter: blur(8px);
-                  -webkit-backdrop-filter: blur(8px);
-                }
-                .animated-link {
-                  transition: color 0.3s ease, transform 0.3s ease;
-                }
-                .animated-link:hover {
-                  color: #ffc107 !important;
-                  transform: translateY(-2px);
-                }
-                .animate-logo {
-                  transition: transform 0.3s ease-in-out;
-                }
-                .animate-logo:hover {
-                  transform: scale(1.05);
-                }
-              </style>
-              
-              <script>
-                window.addEventListener('scroll', function () {
-                  const topBar = document.getElementById('tm-top-bar');
-                  if (window.scrollY > 80) {
-                    topBar.classList.add('scrolled');
-                  } else {
-                    topBar.classList.remove('scrolled');
-                  }
-                });
-              </script>
-              
 
-       
-        <section class="hero-banner text-center text-white d-flex align-items-center justify-content-center" style="background: url('img/hero.jpg') center/cover no-repeat; height: 80vh; position: relative;">
-            <div class="overlay" style="background-color: rgba(0, 0, 0, 0.5); width: 100%; height: 100%; position: absolute; top: 0; left: 0;"></div>
-            <div class="container position-relative">
-              <h1 class="display-4 fw-bold">Discover Kenya’s Wild & Coastal Treasures</h1>
-              <p class="lead mt-3">
+                         <li class="nav-item">
+                            <a class="nav-link animated-link" href="#features">Destinations</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle animated-link" href="#" id="packagesDropdown" role="button" data-toggle="dropdown">
+                                Packages
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#package1">
+                                    <i class="fas fa-tree text-success mr-2"></i>Classic Bush & Beach
+                                </a>
+                                <a class="dropdown-item" href="#package2">
+                                    <i class="fas fa-route text-warning mr-2"></i>Road & Coastal Escape
+                                </a>
+                                <a class="dropdown-item" href="#package3">
+                                    <i class="fas fa-binoculars text-primary mr-2"></i>Safari Immersion
+                                </a>
+                                <a class="dropdown-item" href="#package4">
+                                    <i class="fas fa-umbrella-beach text-info mr-2"></i>Coastal Getaway
+                                </a>
+                            </div>
+                        </li>
+
+                         <li class="nav-item">
+
+          
+                          <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle animated-link" href="#" id="domesticDropdown" role="button" data-toggle="dropdown">
+        Domestic Getaways
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#domestic-getaways">
+            <i class="fas fa-mountain text-success mr-2"></i>Mountain Adventures
+        </a>
+        <a class="dropdown-item" href="#domestic-getaways">
+            <i class="fas fa-umbrella-beach text-info mr-2"></i>Coastal Retreats
+        </a>
+        <a class="dropdown-item" href="#domestic-getaways">
+            <i class="fas fa-hiking text-warning mr-2"></i>Nature Escapes
+        </a>
+        <a class="dropdown-item" href="#domestic-getaways">
+            <i class="fas fa-glass-cheers text-danger mr-2"></i>Romantic Getaways
+        </a>
+    </div>
+</li>
+                       
+                        <li class="nav-item">
+                            <a class="nav-link animated-link" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ====== HERO COMPONENT ====== -->
+    <section class="hero-component" id="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Discover Kenya's Wild & Coastal Treasures</h1>
+            <p class="hero-subtitle">
                 Let us guide you to unforgettable safari and beach experiences.<br>
                 <small class="text-warning d-block mt-2">Travel with confidence – handcrafted journeys, expert guides, seamless logistics.</small>
-              </p>
-              <a href="#classic-bush-beach" class="btn btn-lg btn-warning mt-4">Explore Our Packages</a>
-            </div>
-          </section>
-          
-          
-          <!-- New Highlights Grid Section -->
-          <section class="py-5 bg-white">
-            <div class="container">
-              <h2 class="text-center text-uppercase mb-5">Why Choose Kenya?</h2>
-              <div class="row text-center g-4">
-                <div class="col-md-4">
-                  <div class="card border-0 shadow h-100">
-                    <img src="img/beach1.jpeg" class="card-img-top" style="object-fit: cover; height: 220px;" alt="Sun-Kissed Beaches">
-                    <div class="card-body">
-                      <h5 class="card-title">Sun-Kissed Beaches</h5>
-                      <p class="card-text">Relax on pristine shores from Diani to Lamu with turquoise waters and vibrant culture.</p>
+            </p>
+            <a href="#package1" class="btn btn-lg btn-warning mt-4">Explore Our Packages</a>
+        </div>
+    </section>
+
+    <!-- ====== FEATURES COMPONENT ====== -->
+    <section class="features-component" id="features">
+        <div class="container">
+            <h2 class="text-center text-uppercase mb-5">Why Choose Kenya?</h2>
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card shadow h-100">
+                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&w=400&h=220&fit=crop" class="card-img-top feature-image" alt="Sun-Kissed Beaches">
+                        <div class="card-body">
+                            <h5 class="card-title">Sun-Kissed Beaches</h5>
+                            <p class="card-text">Relax on pristine shores from Diani to Lamu with turquoise waters and vibrant culture.</p>
+                        </div>
                     </div>
-                  </div>
                 </div>
-                <div class="col-md-4">
-                  <div class="card border-0 shadow h-100">
-                    <img src="img/Game2.jpeg" class="card-img-top" style="object-fit: cover; height: 220px;" alt="Thrilling Safaris">
-                    <div class="card-body">
-                      <h5 class="card-title">Thrilling Safaris</h5>
-                      <p class="card-text">Explore the wild with game drives in Maasai Mara, Amboseli, and Tsavo.</p>
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card shadow h-100">
+                        <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&w=400&h=220&fit=crop" class="card-img-top feature-image" alt="Thrilling Safaris">
+                        <div class="card-body">
+                            <h5 class="card-title">Thrilling Safaris</h5>
+                            <p class="card-text">Explore the wild with game drives in Maasai Mara, Amboseli, and Tsavo.</p>
+                        </div>
                     </div>
-                  </div>
                 </div>
-                <div class="col-md-4">
-                  <div class="card border-0 shadow h-100">
-                    <img src="img/mt_kenya.jpeg" class="card-img-top" style="object-fit: cover; height: 220px;" alt="Rich Heritage">
-                    <div class="card-body">
-                      <h5 class="card-title">Rich Heritage</h5>
-                      <p class="card-text">Experience diverse cultures, historical towns, and breathtaking natural landscapes.</p>
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card shadow h-100">
+                        <img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?ixlib=rb-4.0.3&w=400&h=220&fit=crop" class="card-img-top feature-image" alt="Rich Heritage">
+                        <div class="card-body">
+                            <h5 class="card-title">Rich Heritage</h5>
+                            <p class="card-text">Experience diverse cultures, historical towns, and breathtaking natural landscapes.</p>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </section>
-          
-          
+        </div>
+    </section>
 
-            <!-- Packages Section -->
+   <!-- ====== PACKAGE COMPONENTS ====== -->
+<section class="package-component" id="package1">
+    <div class="container">
+        <h2 class="package-title">Classic Bush & Beach Safari</h2>
+        <p class="package-intro">A 6-day luxurious journey from Masai Mara's wilderness to Diani's white-sand beaches.</p>
+        <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&w=1200&h=300&fit=crop" class="package-banner" alt="Classic Safari">
+        
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="package-card">
+                    <h4>Platinum Experience</h4>
+                    <p class="text-success">$3,200 per person</p>
+                    <ul>
+                        <li>Angama Mara & Almanara Villas</li>
+                        <li>Private helicopter transfers</li>
+                        <li>Personal butler service</li>
+                        <li>Exclusive beachfront villa</li>
+                    </ul>
+                    <button class="btn btn-outline-success btn-sm" onclick="BookingManager.openModal('Classic Bush & Beach - Platinum')">Book Now</button>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="package-card">
+                    <h4>Luxury Experience</h4>
+                    <p class="text-primary">$2,400 per person</p>
+                    <ul>
+                        <li>Governors' Camp & The Sands</li>
+                        <li>Private game drives</li>
+                        <li>Spa treatments included</li>
+                        <li>Sunset dhow cruise</li>
+                    </ul>
+                    <button class="btn btn-outline-primary btn-sm" onclick="BookingManager.openModal('Classic Bush & Beach - Luxury')">Book Now</button>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="package-card">
+                    <h4>Comfort Experience</h4>
+                    <p class="text-warning">$1,800 per person</p>
+                    <ul>
+                        <li>Keekorok Lodge & Diani Sea Resort</li>
+                        <li>Scheduled flights</li>
+                        <li>Shared game drives</li>
+                        <li>Beachfront room</li>
+                    </ul>
+                    <button class="btn btn-outline-warning btn-sm" onclick="BookingManager.openModal('Classic Bush & Beach - Comfort')">Book Now</button>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="package-card">
+                    <h4>Budget Experience</h4>
+                    <p class="text-info">$1,200 per person</p>
+                    <ul>
+                        <li>Sentrim Mara & Diani Sea Lodge</li>
+                        <li>Road transfers</li>
+                        <li>Group game drives</li>
+                        <li>Standard beach room</li>
+                    </ul>
+                    <button class="btn btn-outline-info btn-sm" onclick="BookingManager.openModal('Classic Bush & Beach - Budget')">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-            <!-- Classic Bush & Beach Safari -->
-             
-<section id="classic-bush-beach" class="package-section">
+<section class="package-component" id="package2">
     <div class="container">
-      <h2 class="package-title">Classic Bush & Beach Safari</h2>
-      <p class="package-intro">A 6-day luxurious journey from Masai Mara's wilderness to Diani's white-sand beaches.</p>
-      <img src="img/kenyabushbeach1.jpeg" class="img-fluid package-banner" alt="Classic Safari Image">
-  
-      <div class="row sub-packages">
-        <!-- Luxury Tier -->
-        <div class="col-md-4">
-          <div class="package-card">
-            <h4>Luxury Experience</h4>
-            <p>Fly-in safari with top-tier lodges and private beach villas.</p>
-            <ul>
-              <li>Angama Mara & Almanara Villas</li>
-              <li>Private game drives & spa treatments</li>
-              <li>Sunset dhow cruise with champagne</li>
-            </ul>
-            <a class="btn btn-sm btn-link" data-toggle="collapse" href="#luxuryDetails1" role="button" aria-expanded="false" aria-controls="luxuryDetails1">View Itinerary</a>
-            <div class="collapse" id="luxuryDetails1">
-              <div class="card card-body mt-2">
-                Day 1: Arrival in Nairobi & Flight to Masai Mara<br>
-                Day 2: Full-day game drives & village visit<br>
-                Day 3: Flight to Diani & beach relaxation<br>
-                Day 4-5: Snorkeling, dhow cruise, and spa<br>
-                Day 6: Departure<br>
-              </div>
+        <h2 class="package-title">Road & Coastal Escape</h2>
+        <p class="package-intro">Enjoy a scenic road journey to Masai Mara followed by a relaxing Diani beach escape.</p>
+        <img src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&w=1200&h=300&fit=crop" class="package-banner" alt="Road to Coast">
+        
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="package-card">
+                    <h4>Platinum Overland</h4>
+                    <p class="text-success">$2,800 per person</p>
+                    <ul>
+                        <li>Private luxury 4x4 vehicle</li>
+                        <li>Elewana Collection lodges</li>
+                        <li>Personal chef & guide</li>
+                        <li>Beachfront private villa</li>
+                    </ul>
+                    <button class="btn btn-outline-success btn-sm" onclick="BookingManager.openModal('Road & Coastal - Platinum')">Book Now</button>
+                </div>
             </div>
-            <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#bookingModal">Select Package</a>
-          </div>
-        </div>
-  
-        <!-- Comfort Tier -->
-        <div class="col-md-4">
-          <div class="package-card">
-            <h4>Comfort Experience</h4>
-            <p>Mid-range safari camps with excellent service and scenic views.</p>
-            <ul>
-              <li>Keekorok Lodge & The Sands at Nomad</li>
-              <li>Scheduled flights & shared drives</li>
-              <li>Snorkeling & beach dinners</li>
-            </ul>
-            <a class="btn btn-sm btn-link" data-toggle="collapse" href="#comfortDetails1" role="button" aria-expanded="false" aria-controls="comfortDetails1">View Itinerary</a>
-            <div class="collapse" id="comfortDetails1">
-              <div class="card card-body mt-2">
-                Day 1: Arrival and scenic drive to Masai Mara<br>
-                Day 2: Full-day game drive & lunch in the wild<br>
-                Day 3: Return to Nairobi & flight to Diani<br>
-                Day 4-5: Leisure and water sports<br>
-                Day 6: Relaxation & return<br>
-              </div>
+            <div class="col-md-3 mb-4">
+                <div class="package-card">
+                    <h4>Luxury Overland</h4>
+                    <p class="text-primary">$2,100 per person</p>
+                    <ul>
+                        <li>Private 4x4 with driver-guide</li>
+                        <li>Sarova lodges & resorts</li>
+                        <li>All-inclusive dining</li>
+                        <li>Beachfront suite</li>
+                    </ul>
+                    <button class="btn btn-outline-primary btn-sm" onclick="BookingManager.openModal('Road & Coastal - Luxury')">Book Now</button>
+                </div>
             </div>
-            <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#bookingModal">Select Package</a>
-          </div>
-        </div>
-  
-        <!-- Budget Tier -->
-        <div class="col-md-4">
-          <div class="package-card">
-            <h4>Budget-Friendly</h4>
-            <p>A cost-effective safari without compromising the core experience.</p>
-            <ul>
-              <li>Sentrim Mara & Diani Sea Lodge</li>
-              <li>Road transfers & group drives</li>
-              <li>Optional upgrades available</li>
-            </ul>
-            <a class="btn btn-sm btn-link" data-toggle="collapse" href="#budgetDetails1" role="button" aria-expanded="false" aria-controls="budgetDetails1">View Itinerary</a>
-            <div class="collapse" id="budgetDetails1">
-              <div class="card card-body mt-2">
-                Day 1: Arrival & road transfer to Masai Mara<br>
-                Day 2: Safari & village tour<br>
-                Day 3: Travel to Nairobi & onward to Diani<br>
-                Day 4-5: Beach time with optional tours<br>
-                Day 6: Return & departure<br>
-              </div>
+            <div class="col-md-3 mb-4">
+                <div class="package-card">
+                    <h4>Comfort Ride</h4>
+                    <p class="text-warning">$1,500 per person</p>
+                    <ul>
+                        <li>Shared 4x4 transfers</li>
+                        <li>Mid-range lodges</li>
+                        <li>Breakfast & dinner included</li>
+                        <li>Garden view rooms</li>
+                    </ul>
+                    <button class="btn btn-outline-warning btn-sm" onclick="BookingManager.openModal('Road & Coastal - Comfort')">Book Now</button>
+                </div>
             </div>
-            <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#bookingModal">Select Package</a>
-          </div>
+            <div class="col-md-3 mb-4">
+                <div class="package-card">
+                    <h4>Budget Drive</h4>
+                    <p class="text-info">$900 per person</p>
+                    <ul>
+                        <li>Public shuttle options</li>
+                        <li>Budget lodges & guesthouses</li>
+                        <li>Breakfast included</li>
+                        <li>Flexible meal plans</li>
+                    </ul>
+                    <button class="btn btn-outline-info btn-sm" onclick="BookingManager.openModal('Road & Coastal - Budget')">Book Now</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
-  
-  <!-- Booking Modal -->
-  <div class="modal fade" id="bookingModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-md" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Request Booking</h5>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label>Your Name</label>
-              <input type="text" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label>Email Address</label>
-              <input type="email" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label>Selected Package</label>
-              <input type="text" class="form-control" value="Classic Bush & Beach - Luxury" readonly>
-            </div>
-            <div class="form-group">
-              <label>Travel Dates</label>
-              <input type="date" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success btn-block">Send Request</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+</section>
 
-  
-  <!-- Road & Coastal Escape -->
-<section id="road-coastal" class="package-section">
+<section class="package-component" id="package3">
     <div class="container">
-      <h2 class="package-title">Road & Coastal Escape</h2>
-      <p class="package-intro">Enjoy a scenic road journey to Masai Mara followed by a relaxing Diani beach escape.</p>
-      <img src="img/Road & Coastal Escape.jpeg" class="img-fluid package-banner" alt="Road to Coast Image">
-  
-      <div class="row sub-packages">
-        <!-- Luxury -->
-        <div class="col-md-4">
-          <div class="package-card">
-            <h4>Luxury Overland</h4>
-            <p>Private 4x4 road trip with luxury lodge stays.</p>
-            <ul>
-              <li>Exclusive vehicle & guides</li>
-              <li>Luxury lodges & beach villas</li>
-              <li>All-inclusive dining</li>
-            </ul>
-            <a class="btn btn-sm btn-link" data-toggle="collapse" href="#luxuryDetails2" role="button">View Itinerary</a>
-            <div class="collapse" id="luxuryDetails2">
-              <div class="card card-body mt-2">
-                Day 1: Arrival & road trip to Masai Mara<br>
-                Day 2: Game drive & cultural visit<br>
-                Day 3: Return to Nairobi, fly to Diani<br>
-                Day 4-5: Beach activities & relaxation<br>
-                Day 6: Return flight<br>
-              </div>
+        <h2 class="package-title">Safari Immersion</h2>
+        <p class="package-intro">Deep dive into Kenya's wildlife with our exclusive 7-day safari experience.</p>
+        <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&w=1200&h=300&fit=crop" class="package-banner" alt="Safari Immersion">
+        
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="package-card">
+                    <h4>Private Conservancy</h4>
+                    <p class="text-success">$3,500 per person</p>
+                    <ul>
+                        <li>Exclusive conservancy access</li>
+                        <li>Night game drives</li>
+                        <li>Bush walks with Maasai guides</li>
+                        <li>Luxury tented camps</li>
+                    </ul>
+                    <button class="btn btn-outline-success btn-sm" onclick="BookingManager.openModal('Safari Immersion - Private')">Book Now</button>
+                </div>
             </div>
-            <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#bookingModal">Select Package</a>
-          </div>
-        </div>
-        <!-- Comfort -->
-        <div class="col-md-4">
-          <div class="package-card">
-            <h4>Comfort Ride</h4>
-            <p>Group road trip with mid-range accommodations.</p>
-            <ul>
-              <li>Shared transfers</li>
-              <li>Reliable safari lodges</li>
-              <li>Scheduled beach flights</li>
-            </ul>
-            <a class="btn btn-sm btn-link" data-toggle="collapse" href="#comfortDetails2" role="button">View Itinerary</a>
-            <div class="collapse" id="comfortDetails2">
-              <div class="card card-body mt-2">
-                Day 1: Road trip to Mara<br>
-                Day 2: Safari & bonfire storytelling<br>
-                Day 3: Return to Nairobi & fly to coast<br>
-                Day 4-5: Leisure & excursions<br>
-                Day 6: Departure
-              </div>
+            <div class="col-md-3 mb-4">
+                <div class="package-card">
+                    <h4>Premium Safari</h4>
+                    <p class="text-primary">$2,600 per person</p>
+                    <ul>
+                        <li>Multiple park itinerary</li>
+                        <li>Private vehicle & guide</li>
+                        <li>Hot air balloon option</li>
+                        <li>Luxury lodge stays</li>
+                    </ul>
+                    <button class="btn btn-outline-primary btn-sm" onclick="BookingManager.openModal('Safari Immersion - Premium')">Book Now</button>
+                </div>
             </div>
-            <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#bookingModal">Select Package</a>
-          </div>
-        </div>
-        <!-- Budget -->
-        <div class="col-md-4">
-          <div class="package-card">
-            <h4>Budget Drive</h4>
-            <p>Affordable road travel with essential comforts.</p>
-            <ul>
-              <li>Public shuttle options</li>
-              <li>Budget lodges & guesthouses</li>
-              <li>Flexible meal plans</li>
-            </ul>
-            <a class="btn btn-sm btn-link" data-toggle="collapse" href="#budgetDetails2" role="button">View Itinerary</a>
-            <div class="collapse" id="budgetDetails2">
-              <div class="card card-body mt-2">
-                Day 1: Road to Masai Mara<br>
-                Day 2: Game drive and shared tent
-                <br>Day 3: Back to Nairobi, transfer to coast<br>
-                Day 4-5: Free beach time<br>
-                Day 6: Departure
-              </div>
+            <div class="col-md-3 mb-4">
+                <div class="package-card">
+                    <h4>Classic Safari</h4>
+                    <p class="text-warning">$1,900 per person</p>
+                    <ul>
+                        <li>Maasai Mara focus</li>
+                        <li>Shared game drives</li>
+                        <li>Comfortable lodges</li>
+                        <li>All meals included</li>
+                    </ul>
+                    <button class="btn btn-outline-warning btn-sm" onclick="BookingManager.openModal('Safari Immersion - Classic')">Book Now</button>
+                </div>
             </div>
-            <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#bookingModal">Select Package</a>
-          </div>
+            <div class="col-md-3 mb-4">
+                <div class="package-card">
+                    <h4>Adventure Safari</h4>
+                    <p class="text-info">$1,300 per person</p>
+                    <ul>
+                        <li>Budget camping option</li>
+                        <li>Group participation</li>
+                        <li>Self-drive options</li>
+                        <li>Basic amenities</li>
+                    </ul>
+                    <button class="btn btn-outline-info btn-sm" onclick="BookingManager.openModal('Safari Immersion - Adventure')">Book Now</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
-  
-  <!-- Safari Immersion -->
-  <section id="safari-only" class="package-section">
-    <div class="container">
-      <h2 class="package-title">Safari Immersion</h2>
-      <p class="package-intro">A 3-day deep dive into the wildlife and culture of Masai Mara.</p>
-      <img src="img/Safari immersion.jpeg" class="img-fluid package-banner" alt="Safari Immersion Image">
-  
-      <div class="row sub-packages">
-        <!-- Photographer's Pick -->
-        <div class="col-md-4">
-          <div class="package-card">
-            <h4>Photographer's Pick</h4>
-            <p>Tailored game drives for photography enthusiasts.</p>
-            <ul>
-              <li>Private guides & golden-hour drives</li>
-              <li>Custom vehicle seating</li>
-              <li>Extra luggage allowance</li>
-            </ul>
-            <a class="btn btn-sm btn-link" data-toggle="collapse" href="#luxuryDetails3" role="button">View Itinerary</a>
-            <div class="collapse" id="luxuryDetails3">
-              <div class="card card-body mt-2">
-                Day 1: Arrival & photo safari intro<br>
-                Day 2: Dawn & dusk drives<br>
-                Day 3: Final shots & return<br>
-              </div>
-            </div>
-            <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#bookingModal">Select Package</a>
-          </div>
-        </div>
-        <!-- Culture & Wildlife -->
-        <div class="col-md-4">
-          <div class="package-card">
-            <h4>Culture & Wildlife</h4>
-            <p>Balanced safari with strong cultural interaction.</p>
-            <ul>
-              <li>Maasai village immersion</li>
-              <li>Bonfire stories & traditions</li>
-              <li>Day & night game drives</li>
-            </ul>
-            <a class="btn btn-sm btn-link" data-toggle="collapse" href="#comfortDetails3" role="button">View Itinerary</a>
-            <div class="collapse" id="comfortDetails3">
-              <div class="card card-body mt-2">
-                Day 1: Arrival & evening bonfire<br>
-                Day 2: Village visit & wildlife tour<br>
-                Day 3: Game drive & departure
-              </div>
-            </div>
-            <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#bookingModal">Select Package</a>
-          </div>
-        </div>
-        <!-- Budget Safari -->
-        <div class="col-md-4">
-          <div class="package-card">
-            <h4>Budget Safari</h4>
-            <p>Short-stay safari at an affordable price point.</p>
-            <ul>
-              <li>Group game drives</li>
-              <li>Shared camp tents</li>
-              <li>Pre-set itinerary</li>
-            </ul>
-            <a class="btn btn-sm btn-link" data-toggle="collapse" href="#budgetDetails3" role="button">View Itinerary</a>
-            <div class="collapse" id="budgetDetails3">
-              <div class="card card-body mt-2">
-                Day 1: Arrival and camp setup<br>
-                Day 2: Group game drive<br>
-                Day 3: Early drive and check-out
-              </div>
-            </div>
-            <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#bookingModal">Select Package</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Coastal Luxury Getaway -->
-  <section id="coastal-only" class="package-section">
-    <div class="container">
-      <h2 class="package-title">Coastal Luxury Getaway</h2>
-      <p class="package-intro">A 3-day Indian Ocean escape with optional adventures and pure relaxation.</p>
-      <img src="img/costal-experience.jpeg" class="img-fluid package-banner" alt="Coastal Getaway Image">
-  
-      <div class="row sub-packages">
-        <!-- Romantic Escape -->
-        <div class="col-md-4">
-          <div class="package-card">
-            <h4>Romantic Escape</h4>
-            <p>Perfect for honeymoons and anniversaries.</p>
-            <ul>
-              <li>Private villa or beachfront suite</li>
-              <li>Couples spa treatment</li>
-              <li>Sunset dinner on the beach</li>
-            </ul>
-            <a class="btn btn-sm btn-link" data-toggle="collapse" href="#luxuryDetails4" role="button">View Itinerary</a>
-            <div class="collapse" id="luxuryDetails4">
-              <div class="card card-body mt-2">
-                Day 1: Beach arrival & romantic dinner<br>
-                Day 2: Spa & leisure<br>
-                Day 3: Beach breakfast & farewell
-              </div>
-            </div>
-            <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#bookingModal">Select Package</a>
-          </div>
-        </div>
-        <!-- Adventure Seeker -->
-        <div class="col-md-4">
-          <div class="package-card">
-            <h4>Adventure Seeker</h4>
-            <p>Water sports and exploration around Diani and Wasini.</p>
-            <ul>
-              <li>Snorkeling, kite surfing & jet skiing</li>
-              <li>Wasini Island tour</li>
-              <li>Dolphin safari</li>
-            </ul>
-            <a class="btn btn-sm btn-link" data-toggle="collapse" href="#comfortDetails4" role="button">View Itinerary</a>
-            <div class="collapse" id="comfortDetails4">
-              <div class="card card-body mt-2">
-                Day 1: Snorkel adventure<br>
-                Day 2: Island hopping<br>
-                Day 3: Leisure and checkout
-              </div>
-            </div>
-            <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#bookingModal">Select Package</a>
-          </div>
-        </div>
-        <!-- Relax & Recharge -->
-        <div class="col-md-4">
-          <div class="package-card">
-            <h4>Relax & Recharge</h4>
-            <p>Just you, the beach, and a massage.</p>
-            <ul>
-              <li>Oceanfront resort with full amenities</li>
-              <li>Daily yoga & wellness options</li>
-              <li>Optional island hopping</li>
-            </ul>
-            <a class="btn btn-sm btn-link" data-toggle="collapse" href="#budgetDetails4" role="button">View Itinerary</a>
-            <div class="collapse" id="budgetDetails4">
-              <div class="card card-body mt-2">
-                Day 1: Arrival & unwind<br>
-                Day 2: Yoga & spa
-                <br>Day 3: Ocean walk and checkout
-              </div>
-            </div>
-            <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#bookingModal">Select Package</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+</section>
 
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const bookingButtons = document.querySelectorAll('[data-target="#bookingModal"]');
-      const modalLabel = document.getElementById('bookingModalLabel');
-      const inputField = document.getElementById('selectedPackage');
-  
-      bookingButtons.forEach(button => {
-        button.addEventListener('click', function () {
-          const card = this.closest('.package-card');
-          const packageTitle = card.querySelector('h4').textContent;
-          modalLabel.textContent = `Book: ${packageTitle}`;
-          inputField.value = packageTitle;
-        });
-      });
-  
-      // Toast notification element
-      const toast = document.createElement('div');
-      toast.className = 'toast fade hide position-fixed top-0 end-0 m-4';
-      toast.role = 'alert';
-      toast.setAttribute('aria-live', 'assertive');
-      toast.setAttribute('aria-atomic', 'true');
-      toast.innerHTML = `
-        <div class="toast-header bg-success text-white">
-          <strong class="me-auto">Booking Sent</strong>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+<section class="package-component" id="package4">
+    <div class="container">
+        <h2 class="package-title">Coastal Getaway</h2>
+        <p class="package-intro">Pure relaxation with our 5-star beach experiences along Kenya's stunning coastline.</p>
+        <img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?ixlib=rb-4.0.3&w=1200&h=300&fit=crop" class="package-banner" alt="Coastal Getaway">
+        
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="package-card">
+                    <h4>Private Island</h4>
+                    <p class="text-success">$3,000 per person</p>
+                    <ul>
+                        <li>Exclusive island resort</li>
+                        <li>Private beach access</li>
+                        <li>Personal chef & butler</li>
+                        <li>Water sports included</li>
+                    </ul>
+                    <button class="btn btn-outline-success btn-sm" onclick="BookingManager.openModal('Coastal Getaway - Private Island')">Book Now</button>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="package-card">
+                    <h4>Luxury Beach</h4>
+                    <p class="text-primary">$2,200 per person</p>
+                    <ul>
+                        <li>5-star beach resort</li>
+                        <li>Spa treatments included</li>
+                        <li>Oceanfront suite</li>
+                        <li>Gourmet dining</li>
+                    </ul>
+                    <button class="btn btn-outline-primary btn-sm" onclick="BookingManager.openModal('Coastal Getaway - Luxury')">Book Now</button>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="package-card">
+                    <h4>Family Beach</h4>
+                    <p class="text-warning">$1,600 per person</p>
+                    <ul>
+                        <li>Family-friendly resort</li>
+                        <li>Kids club activities</li>
+                        <li>Interconnecting rooms</li>
+                        <li>All-inclusive meals</li>
+                    </ul>
+                    <button class="btn btn-outline-warning btn-sm" onclick="BookingManager.openModal('Coastal Getaway - Family')">Book Now</button>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="package-card">
+                    <h4>Budget Beach</h4>
+                    <p class="text-info">$900 per person</p>
+                    <ul>
+                        <li>3-star beach hotel</li>
+                        <li>Breakfast included</li>
+                        <li>Walking distance to beach</li>
+                        <li>Local experiences</li>
+                    </ul>
+                    <button class="btn btn-outline-info btn-sm" onclick="BookingManager.openModal('Coastal Getaway - Budget')">Book Now</button>
+                </div>
+            </div>
         </div>
-        <div class="toast-body">
-          Your booking request has been sent! We’ll get back to you shortly.
-        </div>
-      `;
-      document.body.appendChild(toast);
-      const bsToast = new bootstrap.Toast(toast);
-  
-      // Form submission handler with toast message
-      const form = document.querySelector('#bookingModal form');
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        bsToast.show();
-        $('#bookingModal').modal('hide');
-        form.reset();
-      });
-    });
-  </script>
-  
-  <!-- Booking Modal -->
-  <div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="bookingModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header bg-dark text-white">
-          <h5 class="modal-title" id="bookingModalLabel">Book a Package</h5>
-          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="https://formspree.io/f/mwpbwpre" method="POST">
-            <div class="form-group">
-              <label for="selectedPackage">Selected Package</label>
-              <input type="text" class="form-control" id="selectedPackage" name="package" readonly>
-            </div>
-            <div class="form-group">
-              <label for="fullName">Full Name</label>
-              <input type="text" class="form-control" id="fullName" name="name" placeholder="Your name" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email address</label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
-            </div>
-            <div class="form-group">
-              <label for="message">Message / Special Requests</label>
-              <textarea class="form-control" id="message" name="message" rows="3"></textarea>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Send Booking</button>
-            </div>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
-  
+</section>
+
+    <!-- ====== DOMESTIC GETAWAYS SECTION ====== -->
+<section class="package-component" id="domestic-getaways" style="background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1582719471386-3a8b094d00e9?ixlib=rb-4.0.3&w=1200&h=300&fit=crop') center/cover;">
+    <div class="container">
+        <h2 class="package-title">Kenyan Domestic Getaways</h2>
+        <p class="package-intro">Experience the beauty of Kenya without leaving the country - perfect for quick escapes and local adventures</p>
+        
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="package-card" style="background: rgba(255,255,255,0.95);">
+                    <div class="text-center mb-3">
+                        <i class="fas fa-mountain text-success fa-3x"></i>
+                    </div>
+                    <h4 class="text-center">Mountain Adventures</h4>
+                    <ul class="pl-3">
+                        <li>Mt. Kenya hiking packages</li>
+                        <li>3-5 day guided treks</li>
+                        <li>Chogoria vs Sirimon routes</li>
+                        <li>All-inclusive from Nairobi</li>
+                    </ul>
+                    <div class="text-center mt-3">
+                        <button class="btn btn-sm btn-success" onclick="BookingManager.openModal('Mountain Adventure')">Explore</button>
+                    </div>
+                </div>
+            </div>
             
-
-                                 
-
-
-  <section class="tm-container-outer tm-position-relative bg-light py-5" id="tm-section-4">
-    <div class="container">
-      <h2 class="text-center mb-4">Get In Touch</h2>
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <form action="https://formspree.io/f/mexample123" method="POST" class="tm-contact-form" id="contact-form">
-            <div class="mb-3">
-              <input type="text" id="contact_name" name="name" class="form-control" placeholder="Name" required />
+            <div class="col-md-3 mb-4">
+                <div class="package-card" style="background: rgba(255,255,255,0.95);">
+                    <div class="text-center mb-3">
+                        <i class="fas fa-umbrella-beach text-info fa-3x"></i>
+                    </div>
+                    <h4 class="text-center">Coastal Retreats</h4>
+                    <ul class="pl-3">
+                        <li>Weekend getaways to Diani</li>
+                        <li>Watamu beach packages</li>
+                        <li>All-inclusive deals</li>
+                        <li>Flight + hotel combos</li>
+                    </ul>
+                    <div class="text-center mt-3">
+                        <button class="btn btn-sm btn-info" onclick="BookingManager.openModal('Coastal Retreat')">Explore</button>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-              <input type="email" id="contact_email" name="email" class="form-control" placeholder="Email" required />
+            
+            <div class="col-md-3 mb-4">
+                <div class="package-card" style="background: rgba(255,255,255,0.95);">
+                    <div class="text-center mb-3">
+                        <i class="fas fa-hiking text-warning fa-3x"></i>
+                    </div>
+                    <h4 class="text-center">Nature Escapes</h4>
+                    <ul class="pl-3">
+                        <li>Hell's Gate cycling trips</li>
+                        <li>Naivasha camping weekends</li>
+                        <li>Aberdare forest hikes</li>
+                        <li>Group discounts available</li>
+                    </ul>
+                    <div class="text-center mt-3">
+                        <button class="btn btn-sm btn-warning" onclick="BookingManager.openModal('Nature Escape')">Explore</button>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-              <input type="text" id="contact_subject" name="subject" class="form-control" placeholder="Subject" required />
+            
+            <div class="col-md-3 mb-4">
+                <div class="package-card" style="background: rgba(255,255,255,0.95);">
+                    <div class="text-center mb-3">
+                        <i class="fas fa-glass-cheers text-danger fa-3x"></i>
+                    </div>
+                    <h4 class="text-center">Romantic Getaways</h4>
+                    <ul class="pl-3">
+                        <li>Honeymoon packages</li>
+                        <li>Anniversary specials</li>
+                        <li>Private villas & lodges</li>
+                        <li>Custom romantic setups</li>
+                    </ul>
+                    <div class="text-center mt-3">
+                        <button class="btn btn-sm btn-danger" onclick="BookingManager.openModal('Romantic Getaway')">Explore</button>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-              <textarea id="contact_message" name="message" class="form-control" rows="6" placeholder="Message" required></textarea>
-            </div>
-            <div class="text-center">
-              <button type="submit" class="btn btn-primary tm-btn-primary tm-btn-send text-uppercase">Send Message Now</button>
-            </div>
-            <div id="form-response" class="text-center mt-3"></div>
-          </form>
         </div>
-      </div>
-    </div>
-    <!-- Google Map Embed -->
-    <div class="mt-5" style="height: 400px;">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1994.8589656727245!2d36.82194611630283!3d-1.2920654986860154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d68175b96b%3A0x5a7c6dbd6725b13a!2sNairobi%2C%20Kenya!5e0!3m2!1sen!2ske!4v1680000000000!5m2!1sen!2ske" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-    </div>
-  </section>
-  
-  <!-- Footer -->
-  <footer class="tm-container-outer text-center py-4 bg-dark text-white">
-    <p class="mb-0">&copy; <span class="tm-current-year">2025</span> Wild Horizon Adventures. Designed by <a rel="nofollow" href="http://www.google.com/+templatemo" target="_blank" class="text-warning">Template Mo</a></p>
-  </footer>
-  
-  <script>
-    const form = document.getElementById('contact-form');
-    const responseDiv = document.getElementById('form-response');
-  
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const data = new URLSearchParams(formData);
-  
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: data
-        });
-  
-        if (res.ok) {
-          responseDiv.innerHTML = '<div class="alert alert-success">Thank you! Your message has been sent.</div>';
-          form.reset();
-        } else {
-          responseDiv.innerHTML = '<div class="alert alert-danger">Oops! There was a problem submitting your form.</div>';
-        }
-      } catch (error) {
-        responseDiv.innerHTML = '<div class="alert alert-danger">Error sending message. Please try again later.</div>';
-      }
-    });
-  </script>
-  
-
-
-
+        
+        <div class="text-center mt-4">
+            <h4>Popular Domestic Destinations</h4>
+            <div class="d-flex flex-wrap justify-content-center mt-3">
+                <span class="badge badge-pill badge-light m-1 p-2">Maasai Mara</span>
+                <span class="badge badge-pill badge-light m-1 p-2">Diani Beach</span>
+                <span class="badge badge-pill badge-light m-1 p-2">Mt. Kenya</span>
+                <span class="badge badge-pill badge-light m-1 p-2">Samburu</span>
+                <span class="badge badge-pill badge-light m-1 p-2">Lake Nakuru</span>
+                <span class="badge badge-pill badge-light m-1 p-2">Watamu</span>
+                <span class="badge badge-pill badge-light m-1 p-2">Amboseli</span>
+                <span class="badge badge-pill badge-light m-1 p-2">Naivasha</span>
+            </div>
+            <a href="#contact" class="btn btn-outline-primary mt-4">Customize Your Getaway</a>
         </div>
-    </div> <!-- .main-content -->
+    </div>
+</section>
 
-    <!-- load JS files -->
-    <script src="js/jquery-1.11.3.min.js"></script>             <!-- jQuery (https://jquery.com/download/) -->
-    <script src="js/popper.min.js"></script>                    <!-- https://popper.js.org/ -->       
-    <script src="js/bootstrap.min.js"></script>                 <!-- https://getbootstrap.com/ -->
-    <script src="js/datepicker.min.js"></script>                <!-- https://github.com/qodesmith/datepicker -->
-    <script src="js/jquery.singlePageNav.min.js"></script>      <!-- Single Page Nav (https://github.com/ChrisWojcik/single-page-nav) -->
-    <script src="slick/slick.min.js"></script>                  <!-- http://kenwheeler.github.io/slick/ -->
-    <script src="js/jquery.scrollTo.min.js"></script>           <!-- https://github.com/flesler/jquery.scrollTo -->
-    <script> 
-        /* Google Maps
-        ------------------------------------------------*/
-        var map = '';
-        var center;
+    <!-- ====== CONTACT COMPONENT ====== -->
+    <section class="contact-component" id="contact">
+        <div class="container">
+            <h2 class="text-center mb-5">Get In Touch</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Subject" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="6" placeholder="Your Message" required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1994.8589656727245!2d36.82194611630283!3d-1.2920654986860154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d68175b96b%3A0x5a7c6dbd6725b13a!2sNairobi%2C%20Kenya!5e0!3m2!1sen!2ske!4v1680000000000!5m2!1sen!2ske" 
+                        width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
 
-        function initialize() {
-            var mapOptions = {
-                zoom: 16,
-                center: new google.maps.LatLng(37.769725, -122.462154),
-                scrollwheel: false
-            };
+    <!-- ====== FOOTER COMPONENT ====== -->
+    <footer class="footer-component">
+        <div class="container">
+            <p class="mb-0">&copy; <span id="currentYear">2025</span> Wild Horizon Adventures. All rights reserved.</p>
+        </div>
+    </footer>
 
-            map = new google.maps.Map(document.getElementById('google-map'),  mapOptions);
+    <!-- ====== BOOKING MODAL COMPONENT ====== -->
+    <div class="modal fade modal-component" id="bookingModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookingModalTitle">Book a Package</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="bookingForm">
+                        <div class="form-group">
+                            <label>Selected Package</label>
+                            <input type="text" class="form-control" id="selectedPackage" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Travel Date</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Special Requests</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Send Booking Request</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            google.maps.event.addDomListener(map, 'idle', function() {
-              calculateCenter();
-          });
+    <!-- ====== NOTIFICATION COMPONENT ====== -->
+    <div id="notification" class="alert alert-success" style="position: fixed; top: 20px; right: 20px; z-index: 1060; display: none;">
+        <strong>Success!</strong> Your request has been sent successfully.
+    </div>
 
-            google.maps.event.addDomListener(window, 'resize', function() {
-              map.setCenter(center);
-          });
-        }
+    <!-- External Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
 
-        function calculateCenter() {
-            center = map.getCenter();
-        }
+    <script>
+        // ====== NAVIGATION MANAGER ======
+        class NavigationManager {
+            static init() {
+                window.addEventListener('scroll', this.handleScroll);
+                this.setupSmoothScrolling();
+            }
 
-        function loadGoogleMap(){
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDVWt4rJfibfsEDvcuaChUaZRS5NXey1Cs&v=3.exp&sensor=false&' + 'callback=initialize';
-            document.body.appendChild(script);
-        } 
-
-        /* DOM is ready
-        ------------------------------------------------*/
-        $(function(){
-
-            // Change top navbar on scroll
-            $(window).on("scroll", function() {
-                if($(window).scrollTop() > 100) {
-                    $(".tm-top-bar").addClass("active");
-                } else {                    
-                 $(".tm-top-bar").removeClass("active");
+            static handleScroll() {
+                const nav = document.getElementById('mainNavigation');
+                if (window.scrollY > 100) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
                 }
-            });
+            }
 
-            // Smooth scroll to search form
-            $('.tm-down-arrow-link').click(function(){
-                $.scrollTo('#tm-section-search', 300, {easing:'linear'});
-            });
+            static setupSmoothScrolling() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+            }
+        }
 
-            // Date Picker in Search form
-            var pickerCheckIn = datepicker('#inputCheckIn');
-            var pickerCheckOut = datepicker('#inputCheckOut');
+        // ====== BOOKING MANAGER ======
+        class BookingManager {
+            static openModal(packageName) {
+                document.getElementById('selectedPackage').value = packageName;
+                document.getElementById('bookingModalTitle').textContent = `Book: ${packageName}`;
+                $('#bookingModal').modal('show');
+            }
 
-            // Update nav links on scroll
-            $('#tm-top-bar').singlePageNav({
-                currentClass:'active',
-                offset: 60
-            });
+            static init() {
+                document.getElementById('bookingForm').addEventListener('submit', this.handleBookingSubmission);
+            }
 
-            // Close navbar after clicked
-            $('.nav-link').click(function(){
-                $('#mainNav').removeClass('show');
-            });
+            static handleBookingSubmission(e) {
+                e.preventDefault();
+                NotificationManager.show('Booking request sent successfully!', 'success');
+                $('#bookingModal').modal('hide');
+                e.target.reset();
+            }
+        }
 
-            // Slick Carousel
-            $('.tm-slideshow').slick({
-                infinite: true,
-                arrows: true,
-                slidesToShow: 1,
-                slidesToScroll: 1
-            });
+        // ====== CONTACT MANAGER ======
+        class ContactManager {
+            static init() {
+                document.getElementById('contactForm').addEventListener('submit', this.handleContactSubmission);
+            }
 
-            loadGoogleMap();                                       // Google Map                
-            $('.tm-current-year').text(new Date().getFullYear());  // Update year in copyright           
+            static handleContactSubmission(e) {
+                e.preventDefault();
+                NotificationManager.show('Message sent successfully!', 'success');
+                e.target.reset();
+            }
+        }
+
+        // ====== NOTIFICATION MANAGER ======
+        class NotificationManager {
+            static show(message, type = 'success') {
+                const notification = document.getElementById('notification');
+                notification.className = `alert alert-${type}`;
+                notification.innerHTML = `<strong>${type === 'success' ? 'Success!' : 'Error!'}</strong> ${message}`;
+                notification.style.display = 'block';
+                
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 4000);
+            }
+        }
+
+        // ====== UTILITIES ======
+        class Utils {
+            static updateCurrentYear() {
+                document.getElementById('currentYear').textContent = new Date().getFullYear();
+            }
+        }
+
+        // ====== INITIALIZATION ======
+        document.addEventListener('DOMContentLoaded', function() {
+            NavigationManager.init();
+            BookingManager.init();
+            ContactManager.init();
+            Utils.updateCurrentYear();
         });
-
-    </script>             
-
+    </script>
 </body>
 </html>
